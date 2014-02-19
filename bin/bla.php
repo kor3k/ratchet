@@ -3,7 +3,9 @@
 use Ratchet\Server\IoServer;
 use Ratchet\Http\HttpServer;
 use Ratchet\WebSocket\WsServer;
+use Ratchet\Wamp\WampServer;
 use Test\Chat;
+use Test\OpenPubSub;
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
@@ -15,10 +17,12 @@ require dirname(__DIR__) . '/vendor/autoload.php';
 $server = IoServer::factory(
     new HttpServer(
         new WsServer(
-            new Chat()
+            new WampServer(
+                new OpenPubSub()
+            )
         )
-    ),
-    8080
+    )
+    , 8080
 );
 
 $server->run();

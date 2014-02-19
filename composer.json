@@ -12,7 +12,14 @@
 
         "php": ">=5.4.22",
         "cboden/Ratchet": "0.3.*" ,
+        "react/zmq": "0.2.*" ,
+        "monolog/monolog": "~1.6" ,
+        "gabrielbull/websocket-client": "dev-master" ,
         "psy/psysh": "dev-master"
 
+    },
+
+    "provide": {
+        "ext-zmq": "*"
     }
 }
