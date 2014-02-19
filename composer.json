@@ -1,6 +1,6 @@
 {
     "name": "kor3k/ratchet",
-    "license": "proprietary",
+    "license": "MIT",
     "type": "project",
     "description": "kor3k ratchet test",
     "autoload": {
