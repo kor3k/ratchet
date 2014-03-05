@@ -102,7 +102,7 @@ class MessageLogger implements MessageComponentInterface , WsServerInterface , W
      */
     function onCall( ConnectionInterface $conn , $id , $topic , array $params )
     {
-        $this->logger->info('onCall', array('from' => $conn->resourceId, 'topic' => $topic , 'method' => $id, 'params' => $params));
+        $this->logger->info('onCall', array('from' => $conn->resourceId, 'topic' => (string)$topic , 'method' => $id, 'params' => $params));
 
         $this->_component->onCall( $conn , $id , $topic , $params );
     }
@@ -115,7 +115,7 @@ class MessageLogger implements MessageComponentInterface , WsServerInterface , W
      */
     function onSubscribe( ConnectionInterface $conn , $topic )
     {
-        $this->logger->info('onSubscribe', array('from' => $conn->resourceId, 'topic' => $topic ));
+        $this->logger->info('onSubscribe', array('from' => $conn->resourceId, 'topic' => (string)$topic ));
 
         $this->_component->onSubscribe( $conn , $topic );
     }
@@ -128,7 +128,7 @@ class MessageLogger implements MessageComponentInterface , WsServerInterface , W
      */
     function onUnSubscribe( ConnectionInterface $conn , $topic )
     {
-        $this->logger->info('onUnSubscribe', array('from' => $conn->resourceId, 'topic' => $topic ));
+        $this->logger->info('onUnSubscribe', array('from' => $conn->resourceId, 'topic' => (string)$topic ));
 
         $this->_component->onUnSubscribe( $conn , $topic );
     }
@@ -144,7 +144,7 @@ class MessageLogger implements MessageComponentInterface , WsServerInterface , W
      */
     function onPublish( ConnectionInterface $conn , $topic , $event , array $exclude , array $eligible )
     {
-        $this->logger->info('onPublish', array('from' => $conn->resourceId, 'topic' => $topic , 'event' => $event, 'exclude' => $exclude, 'eligible' => $eligible));
+        $this->logger->info('onPublish', array('from' => $conn->resourceId, 'topic' => (string)$topic , 'event' => $event, 'exclude' => $exclude, 'eligible' => $eligible));
 
         $this->_component->onPublish( $conn , $topic , $event , $exclude , $eligible );
     }
