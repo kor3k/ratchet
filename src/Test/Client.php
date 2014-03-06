@@ -32,8 +32,8 @@ class Client implements \WebSocketClient\WebSocketClientInterface
     {
         $this->logger->info( 'connected' , $data );
 
-        $this->subscribe( 'kittensCategory' );
-        $this->publish( 'kittensCategory' , 'jupijou' );
+        $this->subscribe( 'public' );
+        $this->publish( 'public' , 'jupijou' );
     }
 
     public function onEvent($topic, $message)

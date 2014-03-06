@@ -34,5 +34,3 @@ $server->run();
 
 //IoServer > IpBlackList > HttpServer > OriginCheck > Router > WsServer > MessageLogger > Session > WampServer > Pusher
 //IoServer > IpBlackList > FlashPolicy
-//http://socketo.me/docs/hello-world
-//https://github.com/Devristo/phpws
