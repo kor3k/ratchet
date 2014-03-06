@@ -31,6 +31,10 @@ class MessageLogger implements MessageComponentInterface , WsServerInterface , W
      */
     protected $_i = 0;
 
+    /**
+     * @param \Ratchet\ComponentInterface   $component
+     * @param \Psr\Log\LoggerInterface      $logger
+     */
     public function __construct( ComponentInterface $component , LoggerInterface $logger )
     {
         $this->_component   =   $component;

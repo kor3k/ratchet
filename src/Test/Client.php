@@ -22,6 +22,10 @@ class Client implements \WebSocketClient\WebSocketClientInterface
      */
     private $loop;
 
+    /**
+     * @param \Psr\Log\LoggerInterface          $logger
+     * @param \React\EventLoop\LoopInterface    $loop
+     */
     public function __construct( LoggerInterface $logger , LoopInterface $loop )
     {
         $this->logger   =   $logger;
@@ -33,7 +37,7 @@ class Client implements \WebSocketClient\WebSocketClientInterface
         $this->logger->info( 'connected' , $data );
 
         $this->subscribe( 'public' );
-        $this->publish( 'public' , 'jupijou' );
+        $this->publish( 'public' , 'hailing frequencies open' );
     }
 
     public function onEvent($topic, $message)

@@ -11,8 +11,14 @@ use Psr\Log\LoggerInterface;
  */
 class PubSub implements WampServerInterface
 {
+    /**
+     * @var \Psr\Log\LoggerInterface
+     */
     protected $logger;
 
+    /**
+     * @param \Psr\Log\LoggerInterface $logger
+     */
     public function __construct( LoggerInterface $logger = null )
     {
         $this->logger   =   $logger;
@@ -37,7 +43,8 @@ class PubSub implements WampServerInterface
         $this->log( "Broadcasted to {$topic->count()} subscribers" );
     }
 
-    public function onCall(Conn $conn, $id, $topic, array $params) {
+    public function onCall(Conn $conn, $id, $topic, array $params)
+    {
         $conn->callError($id, $topic, 'RPC not supported');
     }
 
@@ -66,6 +73,8 @@ class PubSub implements WampServerInterface
         $this->log( "Connection {$conn->resourceId} unsubscribed from topic {$topic}" );
     }
 
-    public function onError(Conn $conn, \Exception $e) {
+    public function onError(Conn $conn, \Exception $e)
+    {
+        $this->log( "Error on connection {$conn->resourceId}: {$e->getMessage()}" );
     }
 }
