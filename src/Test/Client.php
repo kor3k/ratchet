@@ -2,7 +2,7 @@
 
 namespace Test;
 
-class Client extends AbstractClient implements \WebSocketClient\WebSocketClientInterface
+class Client extends AbstractClient
 {
     public function onWelcome(array $data)
     {

@@ -2,20 +2,20 @@
 
 namespace Test;
 
-use Psr\Log\LoggerInterface;
+use WebSocketClient\WebSocketClientInterface;
 use React\EventLoop\LoopInterface;
+use Psr\Log\LoggerInterface,
+    Psr\Log\LoggerAwareInterface,
+    Psr\Log\LoggerAwareTrait;
 
-abstract class AbstractClient implements \WebSocketClient\WebSocketClientInterface
+abstract class AbstractClient implements WebSocketClientInterface , LoggerAwareInterface
 {
+    use LoggerAwareTrait;
+
     /**
      * @var \WebSocketClient
      */
     protected   $client;
-
-    /**
-     * @var \Psr\Log\LoggerInterface
-     */
-    protected   $logger;
 
     /**
      * @var \React\EventLoop\LoopInterface
@@ -28,8 +28,8 @@ abstract class AbstractClient implements \WebSocketClient\WebSocketClientInterfa
      */
     public function __construct( LoopInterface $loop , LoggerInterface $logger )
     {
-        $this->logger   =   $logger;
         $this->loop     =   $loop;
+        $this->setLogger( $logger );
     }
 
     public function onWelcome(array $data)

@@ -2,26 +2,28 @@
 namespace Test;
 use Ratchet\ConnectionInterface as Conn;
 use Ratchet\Wamp\WampServerInterface;
-use Psr\Log\LoggerInterface;
+use Psr\Log\LoggerInterface,
+    Psr\Log\LoggerAwareInterface,
+    Psr\Log\LoggerAwareTrait;
 
 /**
  * A simple pub/sub implementation
  * Anything clients publish on a topic will be received
  *  on that topic by all clients
  */
-class PubSub implements WampServerInterface
+class PubSub implements WampServerInterface , LoggerAwareInterface
 {
-    /**
-     * @var \Psr\Log\LoggerInterface
-     */
-    protected $logger;
+    use LoggerAwareTrait;
 
     /**
      * @param \Psr\Log\LoggerInterface $logger
      */
     public function __construct( LoggerInterface $logger = null )
     {
-        $this->logger   =   $logger;
+        if( $logger )
+        {
+            $this->setLogger( $logger );
+        }
     }
 
     protected function log( $msg )

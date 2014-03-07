@@ -7,18 +7,17 @@ use Ratchet\ConnectionInterface;
 use Ratchet\Wamp\Topic;
 use Ratchet\WebSocket\WsServerInterface;
 use Ratchet\Wamp\WampServerInterface;
-use Psr\Log\LoggerInterface;
+use Psr\Log\LoggerInterface,
+    Psr\Log\LoggerAwareInterface,
+    Psr\Log\LoggerAwareTrait;
 
 /**
  * A Ratchet component that wraps Monolog loggers tracking received messages
  * @todo Get outgoing working; could create LoggingConnection decorator
  */
-class MessageLogger implements MessageComponentInterface , WsServerInterface , WampServerInterface
+class MessageLogger implements MessageComponentInterface , WsServerInterface , WampServerInterface , LoggerAwareInterface
 {
-    /**
-     * @var \Psr\Log\LoggerInterface
-     */
-    protected $logger;
+    use LoggerAwareTrait;
 
     /**
      * @var \Ratchet\ComponentInterface|null
@@ -38,7 +37,7 @@ class MessageLogger implements MessageComponentInterface , WsServerInterface , W
     public function __construct( ComponentInterface $component , LoggerInterface $logger )
     {
         $this->_component   =   $component;
-        $this->logger       =   $logger;
+        $this->setLogger( $logger );
     }
 
     /**

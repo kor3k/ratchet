@@ -23,7 +23,7 @@ $server = IoServer::factory(
 
 $server->run();
 
-//IoServer > IpBlackList > HttpServer > OriginCheck > Router > WsServer > MessageLogger > Session > WampServer > Pusher
+//IoServer > IpBlackList > HttpServer > OriginCheck > Router > WsServer > MessageLogger > Session > WampServer > MyServerApp
 //IoServer > IpBlackList > FlashPolicy
 //http://socketo.me/docs/hello-world
 //https://github.com/Devristo/phpws
