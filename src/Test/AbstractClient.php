@@ -4,6 +4,7 @@ namespace Test;
 
 use WebSocketClient\WebSocketClientInterface;
 use React\EventLoop\LoopInterface;
+use React\EventLoop\Factory as LoopFactory;
 use Psr\Log\LoggerInterface,
     Psr\Log\LoggerAwareInterface,
     Psr\Log\LoggerAwareTrait;
@@ -58,7 +59,7 @@ abstract class AbstractClient implements WebSocketClientInterface , LoggerAwareI
         return $this;
     }
 
-    public function call($proc, $args, Closure $callback = null)
+    public function call($proc, $args, \Closure $callback = null)
     {
         $this->client->call($proc, $args, $callback);
         $this->logger->info( 'call' , [ 'proc' => $proc , 'args' => $args ] );
@@ -91,10 +92,31 @@ abstract class AbstractClient implements WebSocketClientInterface , LoggerAwareI
     }
 
     /**
+     * @return \WebSocketClient
+     */
+    public function getClient()
+    {
+        return $this->client;
+    }
+
+    /**
      * @return LoopInterface
      */
     public function getLoop()
     {
         return $this->loop;
+    }
+
+    /**
+     * @param LoggerInterface $logger
+     * @return static
+     */
+    public static function create( LoggerInterface $logger )
+    {
+        $loop       =   LoopFactory::create();
+        $client     =   new static( $loop, $logger );
+        new \WebSocketClient( $client , $loop );
+
+        return $client;
     }
 }
