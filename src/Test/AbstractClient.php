@@ -61,7 +61,7 @@ abstract class AbstractClient implements WebSocketClientInterface , LoggerAwareI
 
     public function call($proc, $args, \Closure $callback = null)
     {
-        $this->client->call($proc, $args, $callback);
+        $this->client->call( $proc , [ $args ] , $callback );
         $this->logger->info( 'call' , [ 'proc' => $proc , 'args' => $args ] );
 
         return $this;

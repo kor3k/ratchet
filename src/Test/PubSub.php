@@ -47,6 +47,7 @@ class PubSub implements WampServerInterface , LoggerAwareInterface
 
     public function onCall(Conn $conn, $id, $topic, array $params)
     {
+        $this->logger->warning( "Connection {$conn->resourceId} tried to call procedure {$topic}" , $params );
         $conn->callError($id, $topic, 'RPC not supported');
     }
 
